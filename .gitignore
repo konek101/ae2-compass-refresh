@@ -1,0 +1,34 @@
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Visual Studio Code
+.vscode/
+
+# Gradle
+.gradle/
+build/
+run/
+run-data/
+
+# Minecraft
+logs/
+crash-reports/
+
+# macOS
+.DS_Store
+
+# Generated resources
+src/generated/
+
+# Gradle wrapper (keep the wrapper jar)
+!gradle/wrapper/gradle-wrapper.jar

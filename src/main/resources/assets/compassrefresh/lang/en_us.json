@@ -1,0 +1,4 @@
+{
+  "tooltip.compassrefresh.shift_use": "Shift + Right-click to rescan nearby meteorite data",
+  "message.compassrefresh.rescanned": "Rescanned meteorite compass data for %s chunk(s)."
+}
