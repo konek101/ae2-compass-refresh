@@ -1,6 +1,7 @@
 package com.konek101.compassrefresh.mixin;
 
-import appeng.server.services.compass.ServerCompassService;
+import appeng.items.misc.MeteoriteCompassItem;
+import appeng.server.services.compass.CompassService;
 import appeng.util.InteractionUtil;
 import com.konek101.compassrefresh.config.CompassRefreshConfig;
 import net.minecraft.ChatFormatting;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Mixin(targets = "appeng.items.misc.MeteoriteCompassItem")
+@Mixin(value = MeteoriteCompassItem.class, remap = false)
 public class MeteoriteCompassItemMixin {
     
     @Unique
@@ -100,7 +101,7 @@ public class MeteoriteCompassItemMixin {
                 }
                 
                 if (chunk != null) {
-                    ServerCompassService.updateArea(level, chunk);
+                    CompassService.updateArea(level, chunk);
                     scannedCount++;
                 }
             }

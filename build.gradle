@@ -13,6 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'maven-publish'
 
 version = "${mod_version}"
 group = "${mod_group_id}"
@@ -72,9 +73,8 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     
-    // AE2 dependency - compile only for API, runtime for full mod
-    compileOnly fg.deobf("appeng:appliedenergistics2-forge:${ae2_version}:api")
-    runtimeOnly fg.deobf("appeng:appliedenergistics2-forge:${ae2_version}")
+    // AE2 dependency - need full mod for mixin compilation
+    implementation fg.deobf("appeng:appliedenergistics2-forge:${ae2_version}")
     
     // Mixin annotation processor
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
