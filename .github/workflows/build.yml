@@ -1,0 +1,59 @@
+name: Build Mod
+
+on:
+  push:
+    branches: [ main, copilot/add-refresh-behavior-compass ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        cache-read-only: false
+        
+    - name: Cache Forge/Minecraft dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches/forge_gradle
+          ~/.gradle/caches/minecraft
+          ~/.gradle/caches/mcp_repo
+        key: ${{ runner.os }}-forge-${{ hashFiles('gradle.properties', 'build.gradle') }}
+        restore-keys: |
+          ${{ runner.os }}-forge-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build --no-daemon --stacktrace
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: compassrefresh-mod
+        path: build/libs/*.jar
+        if-no-files-found: error
+        
+    - name: Upload to release (if tagged)
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: build/libs/*.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
