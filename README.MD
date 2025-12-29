@@ -39,19 +39,20 @@ When triggered, the mod:
 
 ## Building
 
-This mod requires access to Maven repositories that may not be available in all environments. The build dependencies are:
-
-- Minecraft 1.20.1
-- Forge 47.2.0
-- Applied Energistics 2 (15.2.1)
-- SpongePowered Mixin
-
-To build:
+To build the mod:
 ```bash
 ./gradlew build
 ```
 
-The compiled mod JAR will be in `build/libs/`.
+The compiled mod JAR will be in `build/libs/compassrefresh-1.0.0.jar`.
+
+### Build Requirements
+
+- Java 17 or higher
+- Access to the following Maven repositories:
+  - maven.minecraftforge.net (for ForgeGradle and Forge)
+  - modmaven.dev (for AE2)
+  - Maven Central
 
 ## Installation
 
