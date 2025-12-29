@@ -38,6 +38,11 @@ public class MeteoriteCompassItemMixin {
         if (level.isClientSide || !InteractionUtil.isInAlternateUseMode(player)) {
             return;
         }
+        
+        // Ensure we have a ServerLevel instance
+        if (!(level instanceof ServerLevel)) {
+            return;
+        }
 
         ItemStack stack = player.getItemInHand(hand);
         
